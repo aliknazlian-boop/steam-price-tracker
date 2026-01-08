@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./MyAlerts.css";
 import bg from "../assets/alerts.jpg";
 
-const API = "http://localhost:3030";
+const API = import.meta.env.VITE_API_URL;
 
 function fmtDate(d) {
   if (!d) return "—";

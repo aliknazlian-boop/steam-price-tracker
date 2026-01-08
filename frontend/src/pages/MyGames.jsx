@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import "./MyGames.css";
 
-const API = "http://localhost:3030";
+const API = import.meta.env.VITE_API_URL;
 
 function formatPrice(price_cents, currency) {
   if (price_cents == null) return null; // if backend game null treat it as free
