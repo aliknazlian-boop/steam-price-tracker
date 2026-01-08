@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import "./AddGame.css";
 import bg from "../assets/add-game.png";
 
+const API = import.meta.env.VITE_API_URL;
+
 export default function AddGame() {
   const [term, setTerm] = useState(""); // text in search box inorder for react to understand
   // term = current value
@@ -10,7 +12,7 @@ export default function AddGame() {
   const [added, setAdded] = useState(new Set()); // a set of appids - to disable buttons after adding 
 
   async function addGame(g) { // "g" the game object
-  const res = await fetch("http://localhost:3030/games", { // calls backendAPI and adds game to DB
+  const res = await fetch(`${API}/games`, { // calls backendAPI and adds game to DB
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ appid: g.appid, name: g.name, tiny_image: g.tiny_image }),
@@ -36,7 +38,7 @@ export default function AddGame() {
 
     const id = setTimeout(async () => { // delay search (JavaScript function) - "run this function after x milliseconds" - id is a timer identifier
       try { // allows for search results to pop up 
-        const res = await fetch(`http://localhost:3030/steam/search?term=${encodeURIComponent(q)}`);
+        const res = await fetch(`${API}/steam/search?term=${encodeURIComponent(q)}`);
         const data = await res.json();
         setGames(data.games || []);
       } catch (e) {
