@@ -1,0 +1,12 @@
+/* Make the app truly full-screen */
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Optional: keep a default font but do NOT constrain layout */
+body {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+}

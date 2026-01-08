@@ -1,0 +1,85 @@
+.add-game {
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.panel {
+  width: min(650px, 92vw);
+  margin: 0 auto;
+  padding-top: 300px;
+}
+
+/* Search bar */
+.search-input {
+  width: 100%;
+  padding: 14px 16px;
+  font-size: 1.13em;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+}
+
+/* Results box */
+.results {
+  margin-top: 14px;
+  width: 100%;
+  background: rgba(210, 207, 207, 0.459); /* translucent white */
+  border-radius: 12px;
+  padding: 10px;
+  max-height: 230px;
+  overflow-y: auto;
+  backdrop-filter: blur(2px);
+  border: 1px solid rgba(150, 148, 148, 0.564);
+}
+
+.result-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 10px;
+  color: #111;
+  border-radius: 10px;
+  font-family: "FreeMono", monospace;
+}
+
+.result-row:hover {
+  background: rgba(255, 255, 255, 0.203);
+}
+
+/* Text group */
+.result-text .name {
+  font-weight: 700;
+}
+
+.result-text .appid {
+  opacity: 0.7;
+  font-size: 0.92em;
+}
+
+/* Tiny image */
+.picture {
+  width: 90px;
+  height: 34px;
+  object-fit: cover;
+  border-radius: 5px;
+  flex: 0 0 auto;
+}
+
+/* Add game button */
+.add-btn {
+  margin-left: auto;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  font-weight: 700;
+}
+
+/* Added button */
+.add-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}

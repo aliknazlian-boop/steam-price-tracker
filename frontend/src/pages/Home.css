@@ -1,0 +1,56 @@
+.home {
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  display: grid;
+  place-items: center;
+}
+
+.layout {
+  width: min(720px, 92vw);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  text-align: center;
+}
+
+.btn {
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: rgb(255, 255, 255);
+  padding: 18px 26px;
+  border-radius: 10px;
+  backdrop-filter: blur(4px);
+  background: rgba(105, 192, 141, 0.22);
+  cursor: pointer;
+  font-family: "Courier New", monospace;
+  font-size: 1.13em;
+  letter-spacing: 0.8px;
+  top: 200px;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  background: rgba(130, 190, 155, 0.30);
+  border-color: rgba(255, 255, 255, 0.28);
+}
+
+.btn:active {
+  transform: translateY(0px);
+}
+
+.btn-primary {
+  width: min(380px, 92vw);
+  margin-top: 230px
+}
+
+.btn-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  width: min(380px, 92vw);
+}
+
+.btn-secondary {
+  width: 100%;
+}

@@ -1,0 +1,135 @@
+.alerts-page {
+  min-height: 100vh;
+  padding: 36px 18px;
+  display: grid;
+  place-items: start center;
+}
+
+.alerts-top {
+  width: min(980px, 92vw);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.alerts-title {
+  margin: 0;
+  font-size: 34px;
+  letter-spacing: -0.5px;
+  color: white
+}
+
+.alerts-controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.alerts-email {
+  height: 42px;
+  width: 260px;
+  padding: 0 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.144);
+  background: rgba(255, 255, 255, 0.598);
+  color: rgb(0, 0, 0);
+  backdrop-filter: blur(6px);
+}
+
+.alerts-load {
+  height: 42px;
+  padding: 0 18px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  background: rgba(74, 110, 73, 0.986);
+  color:rgb(255, 255, 255);
+}
+
+.alerts-error {
+  width: min(980px, 92vw);
+  padding: 12px;
+  border-radius: 10px;
+  background: rgba(167, 58, 58, 0.347);
+  color: #c49393;
+  margin-bottom: 12px;
+}
+
+.alerts-card {
+  width: min(980px, 92vw);
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.201);
+  border: 1px solid rgba(255,255,255,0.18);
+  overflow: hidden;
+  color:rgb(255, 255, 255)
+}
+
+.alerts-row {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr 1.4fr 1.4fr 1fr;
+  align-items: center;
+  padding: 14px 16px;
+  gap: 12px;
+}
+
+.alerts-head {
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.231);
+}
+
+.alerts-empty {
+  padding: 18px;
+  text-align: center;
+  opacity: 0.7;
+}
+
+/* column helpers */
+.col-appid,
+.col-min,
+.col-active,
+.col-last,
+.col-created,
+.col-action {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: rgb(30, 29, 29);
+}
+
+.status-on {
+  color: #18bc5c;
+  font-weight: 600;
+}
+
+.status-off {
+  color: #aaa;
+}
+
+.pill {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.2);
+  font-weight: 600;
+}
+
+.alerts-disable {
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  background: rgba(214, 25, 25, 0.82);
+  color: rgb(255, 255, 255);
+}
+
+.alerts-disable:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.muted {
+  opacity: 0.7;
+}

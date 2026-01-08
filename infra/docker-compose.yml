@@ -1,0 +1,15 @@
+services: 
+  db:
+    image: postgres:16
+    container_name: steam_price_db
+    environment:
+      POSTGRES_USER: steam
+      POSTGRES_PASSWORD: steam
+      POSTGRES_DB: steam_prices
+    ports:
+      - "5432:5432"
+    volumes:
+      - steam_pgdata:/var/lib/postgresql/data
+
+volumes:
+  steam_pgdata:
