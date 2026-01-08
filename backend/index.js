@@ -12,14 +12,7 @@ const PORT = process.env.PORT || 3030;
 
 // create the server
 const app = express();
-app.use(cors({
-  origin: [
-    "https://steam-price-tracker-app.vercel.app",
-    "https://steam-price-tracker-o5t2lk3x6-aliks-projects-ba734056.vercel.app"
-  ],
-  methods: ["GET","POST","PATCH","DELETE"],
-  credentials: false,
-}));
+app.use(cors());
 app.use(express.json());
 
 // helper
