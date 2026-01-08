@@ -31,19 +31,6 @@ app.get("/health", (req, res) => { // run once a request is sent
   res.json({ ok: true, message: "backend is running" });
 });
 
-// test route for /games 
-app.get("/games", async (req, res) => { // run function once someone visits /games
-  try {
-    const { rows } = await pool.query( // ask (and wait) postgres for every game (appid and name)
-      "SELECT appid, name FROM games ORDER BY name ASC"
-    ); 
-    res.json(rows);
-  } catch (err) {
-    console.error("DB error:", err);
-    res.status(500).json({ ok: false, error: "DB error" });
-  }
-});
-
 // visits http://localhost:3030/game?appid=# and sends JSON back
 app.get("/game", async (req, res) => {
   try {
@@ -90,34 +77,6 @@ app.get("/game", async (req, res) => {
   }catch (err) { // if some error were to occur, inform user 
     console.error(err);
     res.status(500).json({ ok: false, error: "Something went wrong"});
-  }
-});
-
-app.get("/game/:appid/history", async (req, res) => {
-  try {
-    const appid = parseInt(req.params.appid, 10);
-    // only display last couple price snapshots 
-    const limit = Math.min(parseInt(req.query.limit || "20", 10), 200);
-    // uses limit from URL or it diffults to 20 and never return more than 200
-
-    if(!appid){
-      return res.status(400).json({ok: false, error: "Missing or invalid appid"});
-    }
-
-    const { rows } = await pool.query(
-      // orders the rows of DB results from newest first to oldest last 
-      `SELECT price_cents, currency, discount_percent, recorded_at
-      FROM price_history
-      WHERE appid = $1
-      ORDER BY recorded_at DESC
-      LIMIT $2`,
-      [appid, limit]
-    );
-
-    res.json({ ok: true, appid, history: rows });
-  }catch (err){
-    console.error("DB error:", err);
-    res.status(500).json({ ok: false, error: "DB error"})
   }
 });
 
@@ -371,30 +330,6 @@ app.delete("/alert/:id", async (req, res) =>{
   }catch(err) {
     console.error("DELETE /alert/:id error:", err);
     res.status(500).json({ ok: false, error: "Failed to delete alert"});
-  }
-});
-
-// email tester route (can delete later)
-app.post("/test-email", async (req, res) => {
-  try {
-    const to = String(req.body.email || "").trim().toLowerCase();
-    if (!to || !to.includes("@")) {
-      return res.status(400).json({ ok: false, error: "Missing/invalid email" });
-    }
-
-    await emailAlert({
-      to,
-      gameName: "Test Game",
-      appid: 123,
-      discountPercent: 50,
-      priceCents: 1999,
-      currency: "CAD",
-    });
-
-    res.json({ ok: true, message: "Test email sent" });
-  } catch (err) {
-    console.error("test-email error:", err);
-    res.status(500).json({ ok: false, error: "Failed to send test email" });
   }
 });
 
