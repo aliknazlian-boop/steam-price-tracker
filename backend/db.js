@@ -1,11 +1,9 @@
+console.log("DATABASE_URL present?", !!process.env.DATABASE_URL);
 const { Pool } = require("pg");
 
 const pool = new Pool({
-  user: "steam",
-  password: "steam",
-  host: "localhost",
-  port: 5432,
-  database: "steam_prices",
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false },
 });
 
 module.exports = pool;

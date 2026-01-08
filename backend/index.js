@@ -1,5 +1,7 @@
 // import libraries 
-require("dotenv").config(); // hides secrets
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config(); // hides secrets
+}
 
 const express = require("express"); // makes writing servers easier
 const cors = require("cors"); // allows frontend to talk to backend
@@ -469,8 +471,8 @@ app.post("/games", async (req, res) => {
 
     res.json({ ok: true, game: rows[0] });
   } catch (e) {
-    console.error(e);
-    res.status(500).json({ ok: false, error: "Failed to add game" });
+    console.error("POST /games error:", e);
+    res.status(500).json({ ok: false, error: e.message || String(e) });
   }
 });
 
