@@ -5,21 +5,22 @@ import bg from "../assets/alerts.jpg";
 const API = import.meta.env.VITE_API_URL;
 
 function fmtDate(d) {
-  if (!d) return "—";
-  return new Date(d).toLocaleString();
+  if (!d) return "—"; // if there is no timestamp show a dash "-"
+  return new Date(d).toLocaleString(); // otherwise convert the database timestamp into readable time
 }
 
 export default function MyAlerts() {
-  const [email, setEmail] = useState("");
-  const [alerts, setAlerts] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [err, setErr] = useState("");
+  const [email, setEmail] = useState(""); // what user typed in the email box
+  const [alerts, setAlerts] = useState([]); // an array of alert rows returned from backend
+  const [loading, setLoading] = useState(false); // disable the button to show "Loading..."
+  const [err, setErr] = useState(""); // message shown on screen
 
-  async function loadAlerts(e) {
+
+  async function loadAlerts(e) { // validate the inserted email
     const clean = String(e || "").trim().toLowerCase();
     if (!clean || !clean.includes("@")) {
-      setErr("Enter a valid email to load alerts.");
-      setAlerts([]);
+      setErr("Enter a valid email to load alerts."); // ask user for email
+      setAlerts([]); // store it
       return;
     }
 
@@ -27,9 +28,11 @@ export default function MyAlerts() {
       setErr("");
       setLoading(true);
 
-      const res = await fetch(`${API}/alerts?email=${encodeURIComponent(email)}`);
+      // fetch the email and validate using clean
+      const res = await fetch(`${API}/alerts?email=${encodeURIComponent(clean)}`);
       const data = await res.json();
 
+      // show errors and success messages 
       if (!data.ok) throw new Error(data.error || "Failed to load alerts");
       setAlerts(data.alerts || []);
     } catch (ex) {
@@ -40,23 +43,21 @@ export default function MyAlerts() {
     }
   }
 
+  // send a delete request to backend in order to diable the alert
   async function disableAlert(id) {
     try {
-      const res = await fetch(`${API}/alert/${id}`, { method: "DELETE" });
+      const res = await fetch(`${API}/alert/${id}`, { method: "DELETE" }); // deletes the alert
       const data = await res.json();
-      if (!data.ok) throw new Error(data.error || "Failed to disable alert");
+      if (!data.ok) throw new Error(data.error || "Failed to disable alert"); 
 
       // update UI instantly
-      setAlerts((prev) =>
+      setAlerts((prev) => // updates active button to diabled 
         prev.map((a) => (a.id === id ? { ...a, active: false } : a))
       );
     } catch (ex) {
       alert(ex.message || "Disable failed");
     }
   }
-
-  // optional: if user already typed an email and refreshes page,
-  // nothing auto-loads. Keeping it manual is simplest.
 
   const shown = alerts;
 
