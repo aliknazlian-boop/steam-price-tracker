@@ -1,8 +1,9 @@
-// import libraries 
+// this file holds all the routes required in order to present the UI
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config(); // hides secrets
 }
 
+// import libraries 
 const express = require("express"); // makes writing servers easier
 const cors = require("cors"); // allows frontend to talk to backend
 const pool = require("./db"); // access the database connection pool from db.js
